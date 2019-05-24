@@ -1,0 +1,151 @@
+ class MumMboga {
+  
+  constructor() {
+    this.products = [];
+    this.carts = [];
+    this.orders = [];
+    this.customers  = [];
+  }
+    User(){
+	var username, password;
+	function doLogin(user,pw) {
+		username = user;
+		password = pw;
+		// do the rest of the login work
+	}
+	var publicAPI = {
+		login: doLogin
+	};
+	return publicAPI;
+}
+
+   addProduct(productId, name, price, quantity){
+     let product={
+       productId:productId,
+       name:name,
+       price:price,
+       quantity:quantity 
+     }
+     this.products.push(product)
+     
+   }
+   
+   getProduct(productId){
+     for(var i=0;i<this.products.length;i++){
+     let product=this.products[i];
+     if(product.productId===productId){
+       return product
+     }
+ }
+     
+   }
+   
+   removeProduct(productId){
+     let product=this.getProduct(productId)
+     let index=this.products.indexOf(product);
+     this.products.splice(index,1)
+   }
+   updateProduct(productId, name, price, quantity){
+     
+   }
+   getProductCatalog(){
+     console.log(this.products)
+   }
+   addToCart(cartId, product, orderQuantity, customerId){
+     let cart={
+       cartId:cartId,
+       product:product,
+       OQ:orderQuantity,
+       CI:customerId
+     }
+     this.carts.push(cart)
+   }
+   getFromCart(cartId){
+      for(var i=0;i<this.carts.length;i++){
+     let cart=this.carts[i];
+     if(cart.cartId===cartId){
+       return cart
+     }
+ }
+     
+   }
+    removeFromCart(cartId){
+      let cart=this.getFromCart(cartId)
+     let index=this.carts.indexOf(cart);
+     this.carts.splice(index,1)
+   }
+   createOrder(orderId,cartId){
+     let order={
+       order:orderId,
+       cart:cartId
+     }
+     this.orders.push(order)
+     console.log(orderId+" has orderd apples "+cartId); 
+   }
+  getOrder(orderId){
+    for(var i=0;i<this.orders.length;i++){
+     let order=this.orders[i];
+     if(order.orderId===orderId){
+       return order
+     }
+ }
+  }
+   cancelOrder(){
+     let order=this.getOrder(orderId)
+     let index=this.order.indexOf(order);
+     this.order.splice(index,1)
+   }
+   calculateTotalCost(){
+     
+   }
+   addCustomer(customerId, name, email, address ){
+     let customer={
+       cI:customerId,
+       name:name,
+       email:email,
+       address:address
+     }
+     this.customers.push(customer)
+   }
+   getCustomer(customerId){
+     for(var i=0;i<this.customers.length;i++){
+     let customer=this.customers[i];
+     if(customer.customerId===customerId){
+       return customer
+     }
+ }
+     
+   }
+   removeCustomer(customerId){
+      let customer=this.getCustomer(orderId)
+     let index=this.customer.indexOf(customer);
+     this.customer.splice(index,1)
+     
+   }
+   updateCustomer(customerId, name, email, address){
+    let customer={
+      customerId:customerId,
+      name:name,
+      email:email,
+      address:address
+    }
+    this.customers.push(customer) 
+   }  
+  // ...complete the rest 
+
+}
+var asha=new MumMboga();
+asha.addProduct("p01","apples","700KES",60)
+console.log(asha.products)
+console.log(asha.getProduct("p01"))
+asha.removeProduct("p01")
+console.log(asha.products)
+asha.addToCart("c01","apples",70,"02435476")
+console.log(asha.carts)
+asha.createOrder("o01","c01")
+console.log(asha.orders)
+asha.addCustomer("cu01","Osman","osman@gmail.com","001Nai")
+console.log(asha.customers)
+asha.updateCustomer("cu02","Asha","asha@gmail.com","002Nai")
+console.log(asha.customers)
+
