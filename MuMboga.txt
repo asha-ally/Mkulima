@@ -11,7 +11,7 @@
 	function doLogin(user,pw) {
 		username = user;
 		password = pw;
-		// do the rest of the login work
+		
 	}
 	var publicAPI = {
 		login: doLogin
