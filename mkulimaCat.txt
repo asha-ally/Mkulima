@@ -1,0 +1,170 @@
+class Mkulima {
+    constructor() {
+        this.farms = [];
+        this.vendors = [];
+        this.products = [];
+        this.orders = [];
+    }
+
+    addFarm(farmId, name, farmer, phone, address) {
+        const farm = this.getFarm(farmId);
+
+        if (farm !== undefined) {
+            throw new Error('Farm with id ' + farmId + ' already in exsistance try other');
+        } else {
+            return this.farms.push(farmId,name, farmer, phone, address );
+        }
+    }
+    getFarm(farmId) {
+        return this.farms.find(farm => farm.farmId === farmId);
+    }
+    removeFarm(farmId) {
+        const farm = this.getFarm(farmId);
+
+        if (farm === undefined){
+            throw new Error('Farm with id ' + farmId + ' does not exist');
+        } else {
+            const index = this.farms.indexOf(farm);
+            return this.farms.splice(index, 1);
+        }
+    }
+    updateFarm(farmId, name, farmer, phone, address){
+        const farm = this.getFarm(farmId);
+
+        if (farm === undefined) {
+            throw new Error('Farm with id ' + farmId + ' does not exist');
+        } else {
+            farm.name = name !== undefined ? name : farm.name;
+            farm.farmer = farmer !== undefined ? farmer : farm.farmer;
+            farm.phone = phone !== undefined ? phone : farm.phone;
+            farm.address = address !== undefined ?  address: farm.address;
+
+            return farm;
+        }
+    }
+    addVendor(vendorId, name, phone) {
+        const vendor = this.getVendor(vendorId);
+
+        if (vendor !== undefined) {
+            throw new Error('Vendor with id ' + vendorId + ' already exists');
+        } else {
+            return this.vendors.push({ vendorId, name, phone });
+        }
+    }
+    getVendor(vendorId){
+        return this.vendors.find(vendor => vendor.vendorId === vendorId);
+    }
+    removeVendor(vendorId) {
+        const vendor = this.getVendor(vendorId);
+
+        if (vendor === undefined){
+            throw new Error('Vendor with id ' + vendorId + ' does not exist');
+        } else {
+            const index = this.vendors.indexOf(vendor);
+            return this.vendors.splice(index, 1);
+        }
+    }
+    updateVendor(vendorId, name, phone) {
+        const vendor = this.getVendor(vendorId);
+
+        if (vendor === undefined) {
+            throw new Error('Vendor with id ' + vendorId + ' does not exist');
+        } else {
+            vendor.name = name !== undefined ? name : vendor.name;
+            vendor.phone = phone !== undefined? phone : vendor.phone;
+
+            return vendor;
+        }
+    }
+    addProduct(productId, name, price) {
+        const product = this.getProduct(productId);
+
+        if (product !== undefined) {
+            throw new Error('Product with id ' + productId + ' already exists');
+        } else {
+            return this.products.push({ productId, name, price });
+        }
+    }
+    getProduct(productId) {
+        return this.products.find(product => product.productId === productId);
+    }
+    removeProduct(productId) {
+        const product = this.getProduct(productId);
+
+        if (product === undefined) {
+            throw new Error('Product with id ' + productId + ' does not exist');
+        } else {
+            const index = this.products.indexOf(product);
+            return this.products.splice(index, 1);
+        }
+    }
+    updateProduct(productId, name, price) {
+        const product = this.getProduct(productId);
+
+        if (product === undefined) {
+            throw new Error('Product with id ' + productId + ' does not exist');
+        } else {
+            product.name = name !== undefined ? name : product.name;
+            product.price = price !== undefined ? price : product.price;
+
+            return product;
+        }
+    }
+    printProducts() {
+        console.log('Item\t\tPrice');
+        this.products.forEach((product) => {
+            console.log(product.name + '\t\t' + product.price);
+        });
+    }
+    calculateOrderCost(productId, quantity) {
+        const product = this.getProduct(productId);
+        if (product === undefined) {
+            throw new Error('Product with id ' + productId + ' does not exist');
+        } else {
+            const price = product.price;
+            const orderCost = quantity * price;
+            return orderCost;
+        }
+    }
+    createOrder(productId, quantity, farmId, storeId) {
+        const product = this.getProduct(productId);
+        const farm = this.getFarm(farmId);
+        const store = this.getVendor(storeId);
+
+        if (product == undefined) {
+            throw new Error('Product with id ' + productId + ' does not exist');
+        } else if (farm === undefined) {
+            throw new Error('Farm with id ' + farmId + ' does not exist');
+        } else if (store === undefined) {
+            throw new Error('Store with id ' + storeId + ' does not exist');
+        } else {
+            return this.orders.push({
+                product: product.name,
+                quantity,
+                farm: farm.name,
+                store: store.name,
+            });
+        }
+    }
+}
+
+
+const mkulima = new Mkulima();
+mkulima.addFarm(farmId = 01, name = 'CoffeeFarmers', farmer = 'CTD', phone = 076884, address = '789 Nairobi');
+console.log(mkulima.farms);
+mkulima.updateFarm(farmId = 01, name = 'Nairobi', farmer = 'KTDA');
+console.log(mkulima.farms);
+mkulima.addProduct(productId = 01, name = 'Appless', price = 150);
+mkulima.addProduct(productId = 02, name = 'Peaches', price = 110);
+mkulima.addProduct(productId = 03, name = 'Mango', price = 250);
+mkulima.printProducts();
+mkulima.addVendor(vendorId = 1, name = 'Mposho', phone = 072223452);
+mkulima.updateVendor(vendorId = 1, name = 'Mama mboga');
+console.log(mkulima.vendors);
+mkulima.createOrder(productId = 3, quantity = 5, farmId = 1, storeId = 1);
+mkulima.createOrder(productId = 2, quantity = 10, farmId = 1, storeId = 1);
+console.log(mkulima.orders);
+console.log(mkulima.calculateOrderCost(3, 3));
+
+
+

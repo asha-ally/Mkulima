@@ -1,0 +1,20 @@
+document.body.style.backgroundColor="silver"
+
+var title=document.getElementById("title")
+title.style.color="green"
+
+var font=document.getElementById("asha")
+font.style.textTransform="uppercase"
+
+var font=document.getElementById("uppercase")
+font.style.textTransform="uppercase"
+
+var node = document.createElement("li");                 
+var textnode = document.createTextNode("Apples");         
+node.appendChild(textnode);                              
+document.getElementById("fruitList").appendChild(node);  
+
+var node = document.createElement("li");                 
+var textnode = document.createTextNode("Carrots");         
+node.appendChild(textnode);                              
+document.getElementById("vegList").appendChild(node);  

@@ -1,0 +1,19 @@
+Answer object destructor and Arrow functions.
+let User={
+  name:"Asha Ali",
+  age:43,
+  
+};
+
+let {name,age,isStudent="false"}=User;
+console.log(name,age,isStudent)
+
+let ask=(question, yes, no)=> {
+  if (confirm(question)) yes()
+  else no();
+}
+ask(
+  "Do you agree?",
+  () =>{ console.log("You agreed."); },
+  () =>{ console.log("You canceled the execution."); }
+);

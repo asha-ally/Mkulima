@@ -1,0 +1,21 @@
+class Student{
+  constructor(name,marks){
+    this.name=name
+    this.marks=marks
+  }
+}
+let student1=new Student("Asha",24);
+console.log(student1)
+
+class Student{
+  constructor(){
+    this.name=null
+    this.marks=null
+  }
+}
+
+let student1=new Student()
+student1.name="Asha"
+student1.marks=79
+
+console.log(student1)
